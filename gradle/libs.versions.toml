@@ -1,13 +1,15 @@
 
 [versions]
-exposed-version = "0.58.0"
-h2-version = "2.3.232"
-koin-version = "3.5.6"
 kotlin-version = "2.1.10"
 ktor-version = "3.0.3"
-logback-version = "1.4.14"
+koin-version = "3.5.6"
+exposed-version = "0.58.0"
 postgres-version = "42.7.5"
+h2-version = "2.3.232"
+logback-version = "1.4.14"
 prometheus-version = "1.6.13"
+# Testing
+junit5-version = "5.11.4"
 
 [libraries]
 ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor-version" }
@@ -28,8 +30,11 @@ ktor-server-kafka = { module = "io.github.flaxoos:ktor-server-kafka", version = 
 ktor-server-netty = { module = "io.ktor:ktor-server-netty", version.ref = "ktor-version" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback-version" }
 ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml", version.ref = "ktor-version" }
+# Testing
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit5-version" }
+junit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params" }
 ktor-server-test-host = { module = "io.ktor:ktor-server-test-host", version.ref = "ktor-version" }
-kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin-version" }
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5", version.ref = "kotlin-version" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }

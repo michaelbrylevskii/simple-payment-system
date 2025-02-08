@@ -1,4 +1,4 @@
-package com.michaelbrylevskii.sps
+package com.michaelbrylevskii.sps.accounts
 
 import com.codahale.metrics.*
 import io.github.flaxoos.ktor.server.plugins.kafka.Kafka

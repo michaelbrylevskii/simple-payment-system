@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -6,7 +5,15 @@ plugins {
 }
 
 group = "com.michaelbrylevskii.sps"
-version = "0.0.1"
+version = "1.0-SNAPSHOT"
+
+kotlin {
+    jvmToolchain(21)
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
 
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
@@ -21,6 +28,7 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(libs.ktor.server.auth)
     implementation(libs.ktor.server.core)
     implementation(libs.koin.ktor)
@@ -40,5 +48,10 @@ dependencies {
     implementation(libs.logback.classic)
     implementation(libs.ktor.server.config.yaml)
     testImplementation(libs.ktor.server.test.host)
-    testImplementation(libs.kotlin.test.junit)
+    testImplementation(libs.kotlin.test.junit5)
+
+    // Testing
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.params)
+    testImplementation(libs.kotlin.test.junit5)
 }

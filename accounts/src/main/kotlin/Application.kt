@@ -1,5 +1,6 @@
-package com.michaelbrylevskii.sps
+package com.michaelbrylevskii.sps.accounts
 
+import com.michaelbrylevskii.sps.common.HelloUtil
 import io.ktor.server.application.*
 
 fun main(args: Array<String>) {
@@ -7,6 +8,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    HelloUtil.sayHello()
     configureSecurity()
     configureFrameworks()
     configureHTTP()

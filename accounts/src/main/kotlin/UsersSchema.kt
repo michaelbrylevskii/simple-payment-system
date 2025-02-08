@@ -1,4 +1,4 @@
-package com.michaelbrylevskii.sps
+package com.michaelbrylevskii.sps.accounts
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.Serializable

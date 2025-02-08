@@ -1,4 +1,4 @@
-package com.michaelbrylevskii.sps
+package com.michaelbrylevskii.sps.accounts
 
 import io.ktor.client.request.*
 import io.ktor.http.*
