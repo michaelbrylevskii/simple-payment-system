@@ -1,4 +1,4 @@
-package com.michaelbrylevskii.sps.accounts
+package me.michaelbrylevskii.sps.accounts.example
 
 import com.codahale.metrics.*
 import io.github.flaxoos.ktor.server.plugins.kafka.Kafka
@@ -27,11 +27,7 @@ import io.ktor.server.routing.*
 import io.micrometer.prometheus.*
 import java.sql.Connection
 import java.sql.DriverManager
-import java.util.concurrent.TimeUnit
 import org.jetbrains.exposed.sql.*
-import org.koin.dsl.module
-import org.koin.ktor.plugin.Koin
-import org.koin.logger.slf4jLogger
 
 fun Application.configureDatabases() {
     val dbConnection: Connection = connectToPostgres(embedded = true)

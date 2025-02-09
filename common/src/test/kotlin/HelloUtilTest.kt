@@ -1,12 +1,19 @@
-package com.michaelbrylevskii.sps.common
+package me.michaelbrylevskii.sps.common
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
-class HelloUtilTest {
+class SomeTest {
 
     @Test
-    fun `sayHello should work correctly`() {
-        HelloUtil.sayHello()
-        println("!!!!!!!!")
+    fun `some should work correctly`() {
+        // Given
+        val expected = 123
+
+        // When
+        val actual = 100 + 20 + 3
+
+        // Then
+        assertEquals(expected, actual)
     }
 }

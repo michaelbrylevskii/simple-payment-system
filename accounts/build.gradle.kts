@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.plugin.serialization)
 }
 
-group = "com.michaelbrylevskii.sps"
+group = "me.michaelbrylevskii.sps"
 version = "1.0-SNAPSHOT"
 
 kotlin {
@@ -16,7 +16,7 @@ tasks.test {
 }
 
 application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("me.michaelbrylevskii.sps.accounts.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -28,30 +28,34 @@ repositories {
 }
 
 dependencies {
+    // Project
     implementation(project(":common"))
-    implementation(libs.ktor.server.auth)
-    implementation(libs.ktor.server.core)
+    // Ktor core
+//    implementation(libs.ktor.server.core)
+//    implementation(libs.ktor.server.netty)
+    //implementation(libs.ktor.server.config.yaml)
+    // Serialization
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    // Database
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.postgresql)
+    implementation(libs.h2) // TODO: remove it
+    // Messaging
+    implementation(libs.ktor.server.kafka)
+    // Not sorted
     implementation(libs.koin.ktor)
     implementation(libs.koin.logger.slf4j)
+    implementation(libs.ktor.server.auth)
     implementation(libs.ktor.server.swagger)
     implementation(libs.ktor.server.metrics)
     implementation(libs.ktor.server.metrics.micrometer)
     implementation(libs.micrometer.registry.prometheus)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(libs.ktor.server.content.negotiation)
-    implementation(libs.postgresql)
-    implementation(libs.h2)
-    implementation(libs.exposed.core)
-    implementation(libs.exposed.jdbc)
-    implementation(libs.ktor.server.kafka)
-    implementation(libs.ktor.server.netty)
     implementation(libs.logback.classic)
-    implementation(libs.ktor.server.config.yaml)
-    testImplementation(libs.ktor.server.test.host)
-    testImplementation(libs.kotlin.test.junit5)
-
     // Testing
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.params)
     testImplementation(libs.kotlin.test.junit5)
+    testImplementation(libs.ktor.server.test.host)
 }

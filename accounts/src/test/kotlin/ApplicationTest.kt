@@ -1,4 +1,4 @@
-package com.michaelbrylevskii.sps.accounts
+package me.michaelbrylevskii.sps.accounts
 
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -11,7 +11,7 @@ class ApplicationTest {
     @Test
     fun testRoot() = testApplication {
         application {
-            module()
+            modules()
         }
         client.get("/").apply {
             assertEquals(HttpStatusCode.OK, status)
