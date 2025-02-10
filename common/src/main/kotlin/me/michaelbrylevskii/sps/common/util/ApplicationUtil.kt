@@ -7,21 +7,34 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import me.michaelbrylevskii.sps.common.config.ServerProperties
+import me.michaelbrylevskii.sps.common.util.CollectionUtil.Extensions.forEachReversed
+import kotlin.reflect.KClass
 
 object ApplicationUtil {
 
     const val DEFAULT_FILE_PATH = "/application.yml"
 
-    @PublishedApi
-    internal val logger = KotlinLogging.logger {}
+    private val logger = KotlinLogging.logger {}
 
     inline fun <reified T : Any> loadProperties(
-        filePath: String = DEFAULT_FILE_PATH,
+        mainFilePath: String = DEFAULT_FILE_PATH,
+        profiles: List<String> = EnvironmentUtil.getProfiles(),
+    ): T = loadProperties(
+        klass = T::class,
+        mainFilePath = mainFilePath,
+        profiles = profiles,
+    )
+
+    fun <T : Any> loadProperties(
+        klass: KClass<T>,
+        mainFilePath: String = DEFAULT_FILE_PATH,
         profiles: List<String> = EnvironmentUtil.getProfiles(),
     ): T {
         logger.info { "Loading application properties..." }
-        val configLoader = buildConfigLoader(filePath, profiles)
-        val properties = configLoader.loadConfigOrThrow<T>()
+        val allPropertiesPaths = buildAllPaths(mainFilePath, profiles)
+        logger.info { "Searching properties files: $allPropertiesPaths" }
+        val configLoader = buildConfigLoader(allPropertiesPaths)
+        val properties = configLoader.loadConfigOrThrow(klass, emptyList(), null)
         logger.info { "Loading application properties completed! Properties: \n$properties" }
         return properties
     }
@@ -30,6 +43,7 @@ object ApplicationUtil {
         serverProperties: ServerProperties,
         modulesLoader: Application.() -> Unit
     ) {
+        logger.info { "Loading application..." }
         embeddedServer(
             factory = Netty,
             host = serverProperties.host,
@@ -41,22 +55,22 @@ object ApplicationUtil {
         }.start(wait = true)
     }
 
-    @PublishedApi
-    internal fun buildConfigLoader(
-        filePath: String,
-        profiles: List<String>,
+    private fun buildConfigLoader(
+        propertiesPaths: List<String>,
     ): ConfigLoader = ConfigLoader.invoke {
-        val pathWithoutExt = filePath.substringBeforeLast('.')
-        // addEnvironmentSource()
-        // withEnvironment() // TODO: learn
-        // addResourceSource(filePath)
-        addResourceOrFileSource(filePath)
+        propertiesPaths.forEachReversed {
+            addResourceOrFileSource(it, optional = true)
+        }
+    }
+
+    private fun buildAllPaths(
+        mainFilePath: String,
+        profiles: List<String>,
+    ): List<String> = buildList {
+        add(mainFilePath)
+        val pathWithoutExt = mainFilePath.substringBeforeLast('.')
         profiles.forEach { profile ->
-            val profileFileName = filePath.replace(
-                oldValue = pathWithoutExt,
-                newValue = "$pathWithoutExt-$profile"
-            )
-            addResourceOrFileSource(profileFileName, optional = true)
+            add(mainFilePath.replace(pathWithoutExt, "$pathWithoutExt-$profile"))
         }
     }
 }

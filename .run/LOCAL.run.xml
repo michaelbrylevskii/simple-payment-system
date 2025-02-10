@@ -2,12 +2,6 @@
   <configuration default="false" name="LOCAL" type="KtorApplicationConfigurationType" factoryName="Ktor">
     <option name="MAIN_CLASS_NAME" value="me.michaelbrylevskii.sps.accounts.ApplicationKt" />
     <module name="sps.accounts.main" />
-    <extension name="coverage">
-      <pattern>
-        <option name="PATTERN" value="me.michaelbrylevskii.sps.accounts.*" />
-        <option name="ENABLED" value="true" />
-      </pattern>
-    </extension>
     <option name="alternativeJrePath" />
     <option name="alternativeJrePathEnabled" value="false" />
     <option name="includeProvidedScope" value="false" />
