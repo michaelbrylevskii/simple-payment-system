@@ -1,8 +1,8 @@
-package me.michaelbrylevskii.sps.lib.jdbc.config
+package me.michaelbrylevskii.sps.lib.jdbc.config.model
 
 import com.sksamuel.hoplite.Masked
 
-data class DatabaseProperties(
+data class JdbcDatabaseConfig(
     val url: String? = null,
     val username: String? = null,
     val password: Masked? = null,
