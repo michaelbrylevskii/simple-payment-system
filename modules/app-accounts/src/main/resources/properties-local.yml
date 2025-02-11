@@ -7,6 +7,6 @@ server:
   port: 8080
 
 database:
-  url: "qwe-2-1"
-  user: "qwe-2-2"
-  password: "qwe-2-3"
+  url: "jdbc:postgresql://localhost:5401/accounts"
+  username: "postgres"
+  password: "postgres"

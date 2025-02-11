@@ -1,4 +1,4 @@
-package me.michaelbrylevskii.sps.lib.db
+package me.michaelbrylevskii.sps.lib.jdbc
 
 import me.michaelbrylevskii.sps.lib.core.test.TestUtil.testImportantAction
 import kotlin.test.Test

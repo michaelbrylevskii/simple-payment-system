@@ -6,6 +6,7 @@ import me.michaelbrylevskii.sps.app.accounts.example.configureFrameworks
 import me.michaelbrylevskii.sps.app.accounts.example.configureRouting
 import me.michaelbrylevskii.sps.lib.core.util.ApplicationUtil.loadProperties
 import me.michaelbrylevskii.sps.lib.core.util.ApplicationUtil.startApplication
+import me.michaelbrylevskii.sps.lib.jdbc.util.DatabaseUtil.configureDatabase
 
 object ApplicationStarter {
     @JvmStatic
@@ -15,6 +16,7 @@ object ApplicationStarter {
     }
 
     fun Application.loadModules(properties: ApplicationProperties) {
+        configureDatabase(properties.database)
         configureFrameworks()
         configureRouting()
     }

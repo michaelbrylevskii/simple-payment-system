@@ -23,9 +23,12 @@ dependencies {
     // Project
     implementation(project(":modules:lib-core"))
     // Database
+    api(libs.hikari)
+    api(libs.flyway.core)
+    api(libs.flyway.database.postgresql)
+    api(libs.postgresql)
     api(libs.exposed.core)
     api(libs.exposed.jdbc)
-    api(libs.postgresql)
     // Testing
     testImplementation(testFixtures(project(":modules:lib-core")))
 }

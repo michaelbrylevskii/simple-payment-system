@@ -12,7 +12,7 @@ import kotlin.reflect.KClass
 
 object ApplicationUtil {
 
-    const val DEFAULT_FILE_PATH = "/application.yml"
+    const val DEFAULT_FILE_PATH = "/properties.yml"
 
     private val logger = KotlinLogging.logger {}
 
